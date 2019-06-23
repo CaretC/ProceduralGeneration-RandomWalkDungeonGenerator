@@ -13,25 +13,36 @@ namespace RandomWalkDungeonGenerator
         */
 
         // ======= Properties =======
+
+        // Sets the character that prints as Walls. Default █.
         public char WallCharacter { get; set; } = '█';
 
+        // Sets the Wall Color. Default is ConsoleColor.Green.
         public ConsoleColor WallColor { get; set; } = ConsoleColor.Green;
 
+        // Sets the default console color. Default is ConsoleColor.Gray.
         public ConsoleColor DefaultColor { get; set; } = ConsoleColor.Gray;
 
+        // Sets the number of tiles required to be generated. Default is 150.
         public int TunnelsRequired { get; set; } = 150;
 
+        // Sets the maximum length a generated tunnel can be. Default is 10.
         public int MaxTunnelLength { get; set; } = 10;
 
         // ======= Private Variables =======
+
+        // Saves the width of the console
         private int consoleWitdth = Console.WindowWidth;
 
+        // Saves the height of the console.
         private int consoleHeight = Console.WindowHeight;
 
         // ======= Classes =======
         Random randomNumber = new Random();
 
         // ======= Public Methods =======
+        
+        // Generates a Rectangular type map.
         public void GenerateRectangleMap()
         {
             bool[,] map = generateMap();
@@ -39,6 +50,7 @@ namespace RandomWalkDungeonGenerator
             printMap(map);       
         }
 
+        // Generates a Natural type map.
         public void GenerateNaturalMap()
         {
             bool[,] map = generateMap();
@@ -48,7 +60,7 @@ namespace RandomWalkDungeonGenerator
 
             printMap(map);
         }
-
+                
         // ======= Private Methods =======
 
         // Make a map full of 'walls'.
@@ -89,7 +101,7 @@ namespace RandomWalkDungeonGenerator
             };
 
             return direction[randomNumber.Next(0, direction.Length)];
-        } 
+        }
 
         // Make a tunnel of a random length (between 1 and MaxTunnelLength) in a random direction. Returns the the end position of the tunnel.
         private int[,] makeTunnel(bool[,] map, int[,] currentPosition)
@@ -130,11 +142,13 @@ namespace RandomWalkDungeonGenerator
             return valid;
         }
 
+        // Sets designated cell to empty.
         private void setEmpty(bool[,] map, int xPosition, int yPosition)
         {
             map[xPosition, yPosition] = false;
         } 
 
+        // Generates a map as a bool array.
         private bool[,] generateMap()
         {
             bool[,] map = initializeMap();
@@ -152,11 +166,13 @@ namespace RandomWalkDungeonGenerator
             return map;
         }
 
+        // Smooths a rectangle map to make a Natural Style map
         private void smoothMap(bool[,] map)
         {
             
         }
 
+        // Prints map to the console.
         private void printMap(bool[,] map)
         {
             Console.Clear();
@@ -176,8 +192,6 @@ namespace RandomWalkDungeonGenerator
             }
 
             Console.ForegroundColor = DefaultColor;
-        }
-
-    
+        }    
     }
 }
